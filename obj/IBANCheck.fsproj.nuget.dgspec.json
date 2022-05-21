@@ -1,0 +1,66 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/nazipira/Documents/ValidateIBAN/IBANCheck.fsproj": {}
+  },
+  "projects": {
+    "/Users/nazipira/Documents/ValidateIBAN/IBANCheck.fsproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/nazipira/Documents/ValidateIBAN/IBANCheck.fsproj",
+        "projectName": "IBANCheck",
+        "projectPath": "/Users/nazipira/Documents/ValidateIBAN/IBANCheck.fsproj",
+        "packagesPath": "/Users/nazipira/.nuget/packages/",
+        "outputPath": "/Users/nazipira/Documents/ValidateIBAN/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/nazipira/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "FSharp.Core": {
+              "include": "Runtime, Compile, Build, Native, Analyzers, BuildTransitive",
+              "target": "Package",
+              "version": "[6.0.2, )",
+              "generatePathProperty": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.200/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
