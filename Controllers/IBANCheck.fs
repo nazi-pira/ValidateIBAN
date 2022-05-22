@@ -1,6 +1,6 @@
 #light "off"
 namespace CheckIBAN.Controllers
-
+open System
 open Microsoft.AspNetCore.Mvc
 open Microsoft.Extensions.Logging
 open System.Text.RegularExpressions
@@ -21,7 +21,38 @@ type CheckIBANController (logger : ILogger<CheckIBANController>) = class
     member this.Get() = {IBANValid=false}
     [<HttpGet("{iban}")>]
     member this.Get (iban : string) =
-        let countries = dict [
+    
+    let stripedIban:string = Regex.Replace( iban, "\s", "") in
+    let signatur = (stripedIban+"xx").Substring( 0,2) 
+        + (string stripedIban.Length) 
+        + " " in
+    //  "BE71 0961 2345 6769" -> "BE16 "
+    // compeate list https://en.wikipedia.org/wiki/International_Bank_Account_Number
+	let lengths = "
+    AL28 AD24 AT20 AZ28 BE16 BH22 BA20 BR29 BG22 CR21 HR21 CY28 
+	CZ24 DK18 DO28 EE20 FO18 FI18 FR27 GE22 DE22 GI23 GR27 GL18 
+	GT28 HU28 IS26 IE22 IL23 IT27 KZ20 KW30 LV21 LB28 LI21 LT20 
+	LU20 MK19 MT31 MR27 MU30 MC27 MD24 ME22 NL18 NO15 PK24 PS29 
+	PL28 PT25 RO24 SM27 SA24 RS22 SK24 SI19 ES24 SE24 CH21 TN24 
+	TR26 AE23 GB22 VG24 " in
+    //  "BE71 0961 2345 6769" -> "096123456769BE71"
+    //always " " after signatur+ len
+    let swap (s:string) = s.Substring(4) + s.Substring(0,4) in
+    let toCode c = if c >= '0' && c <= '9' 
+        then string(c) 
+        else string (10 + int(c) - int('A')) in
+    //  "BE71 0961 2345 6769" -> 096123456769111471  
+    let checksum s  = 
+        swap s
+        |> Seq.map toCode 
+        |> String.Concat  
+        |> bigint.Parse in
+    //return result  
+    if not (lengths.Contains(signatur)) then false else 
+        checksum stripedIban % bigint(97) = bigint(1)
+
+//__________________________________OLD SOLUTION_____________________________________
+       (* let countries = dict [
             ("AL", 28); ("AD", 24); ("AT", 20); ("AZ", 28); ("BE", 16); ("BH", 22);
             ("BA", 20); ("BR", 29); ("BG", 22); ("CR", 21); ("HR", 21); ("CY", 28);
             ("CZ", 24); ("DK", 18); ("DO", 28); ("EE", 20); ("FO", 18); ("FI", 18);
@@ -69,21 +100,6 @@ type CheckIBANController (logger : ILogger<CheckIBANController>) = class
         if not (Regex.IsMatch(iban, @"[^A-Z\d ]")) then 
             validateLenght
         else 
-            result false
+            result false *)
 end
 
-
-(* TEST______TRUE
-curl -k https://localhost:7095/CHeckIBAN 
- Th
- curl -k https://localhost:7095/CheckIBAN/
- curl -k https://localhost:7095/CheckIBAN/sfsfsfs%20lsls 
-TEST______False
- curl -k "https://localhost:7095/CheckIBAN/GB82 WEST 1234 5698 7654 32"
- curl -k 'https://localhost:7095/CheckIBAN/GB82 WEST 1234 5698 7654 32'
- curl -k https://localhost:7095/CheckIBAN/GB82%20WEST%201234%205698%207654%2032
- nazipira@Nazis-MacBook-Pro FSharpWebApi % curl -k https://localhost:7095/CheckIBAN/GB82%20WEST%201234%205698%207654%2032
-{"IBANValid":true,"iban":"GB82 WEST 1234 5698 7654 32"}%                                                       
-nazipira@Nazis-MacBook-Pro FSharpWebApi % curl -k https://localhost:7095/CheckIBAN/GHGG2{"IBANValid":false,"iban":"GHGG2"}%                                                                            
-nazipira@Nazis-MacBook-Pro FSharpWebApi % curl -k https://localhost:7095/CheckIBAN/GBGG2
-*)

@@ -1,0 +1,6 @@
+curl -k https://localhost:5001/CHeckIBAN 2>1 | tee | grep -c false
+if [ $? -eq 0 ]; then     
+    echo "success!" 
+else
+    echo "Failed"  
+fi 
