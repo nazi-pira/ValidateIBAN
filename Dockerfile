@@ -13,9 +13,8 @@ EXPOSE 7130
 EXPOSE 5098
 #5198
 # Execute the web-server
-CMD ["./bin/release/IBANCheck"]
-# docker build -t fsharp_hello_docker
-# docker run -p 8080:8080 -t fsharp_hello_docker
+CMD ["./bin/IBANCheck"]
+
 
 
 

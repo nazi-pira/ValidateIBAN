@@ -36,7 +36,7 @@ type CheckIBANController (logger : ILogger<CheckIBANController>) = class
 	PL28 PT25 RO24 SM27 SA24 RS22 SK24 SI19 ES24 SE24 CH21 TN24 
 	TR26 AE23 GB22 VG24 " in
     //  "BE71 0961 2345 6769" -> "096123456769BE71"
-    //always " " after signatur+ len
+    //always " " after signature+ len
     let swap (s:string) = s.Substring(4) + s.Substring(0,4) in
     let toCode c = if c >= '0' && c <= '9' 
         then string(c) 
