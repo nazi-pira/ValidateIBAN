@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "XzhLOYfAIk5/Qz7zUqyLc5gCodzWzXZ0izvwE1/FTlc=",
+  "Source": "IBANCheck",
+  "BasePath": "_content/IBANCheck",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
