@@ -1,9 +1,9 @@
-RET="All tests OK"
+rc=0
 curltest () {
 curl http://localhost:5000/CHeckIBAN/$1 2>1 | grep -q $2
 if [ $? -ne 0 ]; then     
     echo "ERROR: check IBAN  $1 shall return $2 fails"
-    RET="test(s) fails"
+    rc=1
 fi 
 }
 curltest a false
@@ -13,6 +13,4 @@ curltest SK08%200900%200000%200001%202312%203120 false
 
 curltest SK08%200900%200000%200001%202312%203123 true
 curltest GB82%20WEST%201234%205698%207654%2032 true
-#echo $RET 
-echo $RET | grep -q OK
-
+exit $rc
