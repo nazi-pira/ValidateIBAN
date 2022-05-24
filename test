@@ -1,6 +1,18 @@
-curl -k https://localhost:5001/CHeckIBAN 2>1 | tee | grep -c false
+curltest () {
+echo "Check IBAN  $1 shall return $2"
+curl http://localhost:5000/CHeckIBAN/$1 2>1 | grep -q $2
 if [ $? -eq 0 ]; then     
     echo "success!" 
 else
     echo "Failed"  
 fi 
+}
+
+curltest a false
+curltest GBGG2 false
+curltest XX3949405050503 false
+curltest SK08%200900%200000%200001%202312%203120 false
+
+curltest SK08%200900%200000%200001%202312%203123 true
+curltest GB82%20WEST%201234%205698%207654%2032 true
+
