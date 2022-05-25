@@ -11,7 +11,6 @@ type Response =
     }
     with
     end
-
 [<ApiController>]
 [<Route("[controller]")>]
 type CheckIBANController (logger : ILogger<CheckIBANController>) = class

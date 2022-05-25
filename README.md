@@ -12,6 +12,8 @@ IBAN Validator: This is a simple application that validates the IBAN number.
 7. docker run -it --rm -p 5000:80 --name aspnetcore_sample aspnetapp
 the program can be run with http protocol and on th port 5000
 #  Test--
+You can find the automated test in the test file as well.
+curl:
 curl  http://localhost:7095/CheckIBAN/GBGG2
 TEST______False
 curl  http://localhost:5000/CHeckIBAN 

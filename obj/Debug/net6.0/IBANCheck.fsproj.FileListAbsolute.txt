@@ -28,3 +28,4 @@
 /Users/nazipira/Documents/ValidateIBAN/obj/Debug/net6.0/IBANCheck.dll
 /Users/nazipira/Documents/ValidateIBAN/obj/Debug/net6.0/IBANCheck.pdb
 /Users/nazipira/Documents/ValidateIBAN/obj/Debug/net6.0/IBANCheck.genruntimeconfig.cache
+/Users/nazipira/Documents/ValidateIBAN/obj/Debug/net6.0/IBANCheck.fsproj.CoreCompileInputs.cache
